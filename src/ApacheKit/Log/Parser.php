@@ -103,7 +103,7 @@ class Parser implements ParserInterface
         if (!preg_match($this->pattern, $line, $matches)) {
             return false;
         }
-//echo "<td colspan=14>$line</td></tr><tr>";
+
         // Removes numeric keys
         $matches = array_diff_key($matches, range(0, count($matches) >> 1));
 

@@ -83,12 +83,14 @@ class FileCollection implements \IteratorAggregate
         if (!$this->iterator) {
             $this->iterator = new \AppendIterator();
             foreach ($this->files as $key => $file) {
-                if ('.gz' == substr($file, -3)) {
+                if (!is_file($file)) continue;
+
+                if ('application/x-gzip' == mime_content_type($file)) {
                     $this->logFiles[$key] = new GzFile($file);
                 } else {
                     $this->logFiles[$key] = new File($file);
                 }
-//
+
                 if ($this->parser) {
                     $this->logFiles[$key]->setLogParser($this->parser);
                 }
@@ -100,18 +102,28 @@ class FileCollection implements \IteratorAggregate
         return $this->iterator;
     }
 
+    /**
+     * 
+     */
     public function next()
     {
         parent::next();
         $this->position++;
     }
 
+    /**
+     * 
+     */
     public function rewind()
     {
         parent::rewind();
         $this->position = 0;
     }
 
+    /**
+     *
+     * @return int 
+     */
     public function key()
     {
         return $this->position;

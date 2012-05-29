@@ -91,8 +91,7 @@ class Filter extends \FilterIterator
      */
     private function regex($line)
     {
-        return isset($line[$this->directive]);
-//        return isset($line[$this->directive]) && preg_match($this->filter, $line[$this->directive]) > 0;
+        return isset($line[$this->directive]) && preg_match($this->filter, $line[$this->directive]) > 0;
     }
 
     /**
