@@ -192,4 +192,13 @@ class FileCollection implements \IteratorAggregate
 
         return $this;
     }
+
+    /**
+     *
+     * @return array
+     */
+    public function getFiles()
+    {
+        return $this->logFiles;
+    }
 }
